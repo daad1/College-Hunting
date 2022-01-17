@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.daadalotaibi_beltexam.Database.UnivercityTable
+import com.example.daadalotaibi_beltexam.Database.UniversityTable
 import com.example.daadalotaibi_beltexam.Model.MyViewModel
 import com.example.daadalotaibi_beltexam.RVAdapter.RVDdapter
 
@@ -20,9 +20,9 @@ class DBFragment : Fragment() {
 
     lateinit var btDatabaseBack: Button
     lateinit var rvDatabase: RecyclerView
-    lateinit var DatabaseAdapter: RVDdapter
+    lateinit var databaseAdapter: RVDdapter
     val myViewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) }
-    var list = ArrayList<UnivercityTable>()
+    var list = ArrayList<UniversityTable>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,13 +38,13 @@ class DBFragment : Fragment() {
             Navigation.findNavController(view).navigate(R.id.action_DBFragment_to_homeFragment)
         }
 
-        myViewModel.getunivercity().observe(viewLifecycleOwner, {
+        myViewModel.getUniversity().observe(viewLifecycleOwner, {
                 List ->
-            DatabaseAdapter.update(List as ArrayList<UnivercityTable>)
+            databaseAdapter.update(List as ArrayList<UniversityTable>)
         })
 
-        DatabaseAdapter =RVDdapter(this ,list)
-        this.rvDatabase.adapter = DatabaseAdapter
+        databaseAdapter =RVDdapter(this ,list)
+        this.rvDatabase.adapter = databaseAdapter
         this.rvDatabase.layoutManager = LinearLayoutManager(this.context)
 
         return view

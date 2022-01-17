@@ -1,6 +1,6 @@
 package com.example.daadalotaibi_beltexam.Api
 
-import com.example.daadalotaibi_beltexam.Model.Constants.Companion.BASE_URL
+import com.example.daadalotaibi_beltexam.Model.Constants.Companion.unvires_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -14,7 +14,7 @@ class APIClient {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
         retrofit = Retrofit.Builder()
-            .baseUrl("$BASE_URL")
+            .baseUrl("$unvires_URL")
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

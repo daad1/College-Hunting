@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.daadalotaibi_beltexam.APIFragment
-import com.example.daadalotaibi_beltexam.Database.UnivercityTable
+import com.example.daadalotaibi_beltexam.Database.UniversityTable
 import com.example.daadalotaibi_beltexam.Model.Universities
 import com.example.daadalotaibi_beltexam.R
 import kotlinx.android.synthetic.main.item_row.view.*
@@ -40,7 +40,7 @@ class RVAdapter (private val fragment: APIFragment, private var list: Universiti
                 "${data.name} is added",
                 Toast.LENGTH_LONG
             ).show()
-            fragment.myViewModel.addunivercity(UnivercityTable(0,data.name!!,data.country!!,""))
+            fragment.myViewModel.addUniversity(UniversityTable(0,data.name!!,data.country!!,""))
         }
     }
     override fun getItemCount() = list.size

@@ -29,7 +29,7 @@ import retrofit2.Response
 
 class APIFragment : Fragment() {
     lateinit var rvSearch: RecyclerView
-    lateinit var etUnivercityName: EditText
+    lateinit var etUniversityName: EditText
     lateinit var btAPIBack: Button
     lateinit var btSearch: Button
     lateinit var searchAdapter: RVAdapter
@@ -45,7 +45,7 @@ class APIFragment : Fragment() {
 
         btAPIBack=view.findViewById(R.id.btAPIBack)
         btSearch=view.findViewById(R.id.btSearch)
-        etUnivercityName = view.findViewById(R.id.etUnivercityName)
+        etUniversityName = view.findViewById(R.id.etUnivercityName)
         rvSearch =view.findViewById(R.id.rvSearch)
 
         btAPIBack.setOnClickListener {
@@ -53,13 +53,13 @@ class APIFragment : Fragment() {
         }
 
         btSearch.setOnClickListener {
-            var  search = etUnivercityName.text.toString()
+            var  search = etUniversityName.text.toString()
             if (search.isNotEmpty()) {
                 getApi(search)
             } else {
                 Toast.makeText(this.requireContext(), "Enter a name", Toast.LENGTH_SHORT).show()
             }
-            etUnivercityName.text.clear()
+            etUniversityName.text.clear()
             hideKeyboard()
         }
         return view
@@ -73,7 +73,7 @@ class APIFragment : Fragment() {
 
         val apiInterface = APIClient().getClient()?.create(APIInterface::class.java)
 
-        val call: Call<Universities?>? = apiInterface!!.getUnivercityInfo("/search?name=$keyword")
+        val call: Call<Universities?>? = apiInterface!!.universityInfo("/search?name=$keyword")
 
         call?.enqueue(object : Callback<Universities?> {
             override fun onResponse(

@@ -9,6 +9,6 @@ import retrofit2.http.Url
 interface APIInterface {
     @Headers("Content-Type: application/json")
     @GET
-    fun getUnivercityInfo(@Url url:String): Call<Universities?>?
+    fun universityInfo(@Url url:String): Call<Universities?>?
 
 }

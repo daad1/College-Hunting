@@ -3,37 +3,37 @@ package com.example.daadalotaibi_beltexam.Model
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.daadalotaibi_beltexam.Database.UnivercityTable
-import com.example.daadalotaibi_beltexam.Database.UnivercityTableDatabase
+import com.example.daadalotaibi_beltexam.Database.UniversityTable
+import com.example.daadalotaibi_beltexam.Database.DatabaseUniversityTable
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MyViewModel (application: Application): AndroidViewModel(application) {
 
-    private val univercityDao= UnivercityTableDatabase.getInstance(application).UniDao()
+    private val univercityDao= DatabaseUniversityTable.getInstance(application).UniDao()
 
-    private val allunivercities: LiveData<List<UnivercityTable>> = univercityDao.getunivercity()
+    private val allunivercities: LiveData<List<UniversityTable>> = univercityDao.getUniversity()
 
-    fun getunivercity(): LiveData<List<UnivercityTable>> {
+    fun getUniversity(): LiveData<List<UniversityTable>> {
         return allunivercities
     }
 
-    fun addunivercity(uni: UnivercityTable){
+    fun addUniversity(uni: UniversityTable){
         CoroutineScope(Dispatchers.IO).launch {
-            univercityDao.insertunivercity(uni)
+            univercityDao.insertUniversity(uni)
         }
     }
 
-    fun updatenivercity(uni: UnivercityTable){
+    fun updateUniversity(uni: UniversityTable){
         CoroutineScope(Dispatchers.IO).launch {
-            univercityDao.updatenivercity(uni)
+            univercityDao.updateUniversity(uni)
         }
     }
 
-    fun deleteunivercity(playground: UnivercityTable){
+    fun deleteUniversity(playground: UniversityTable){
         CoroutineScope(Dispatchers.IO).launch {
-            univercityDao.deleteunivercity(playground)
+            univercityDao.deleteUniversity(playground)
         }
     }
 

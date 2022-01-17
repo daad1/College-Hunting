@@ -5,17 +5,17 @@ import androidx.room.*
 
 @Dao
 interface UnivercityTableDao {
-    @Query("SELECT * FROM UnivercityTable")
-    fun getunivercity(): LiveData<List<UnivercityTable>>
+    @Query("SELECT * FROM UniversityTable")
+    fun getUniversity(): LiveData<List<UniversityTable>>
 
 
     @Insert
-    fun insertunivercity(univercity: UnivercityTable)
+    fun insertUniversity(university: UniversityTable)
 
     @Update
-    fun updatenivercity(univercity: UnivercityTable)
+    fun updateUniversity(university: UniversityTable)
 
     @Delete
-    fun deleteunivercity(univercity: UnivercityTable)
+    fun deleteUniversity(university: UniversityTable)
 
 }

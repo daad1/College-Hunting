@@ -10,13 +10,13 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.daadalotaibi_beltexam.DBFragment
-import com.example.daadalotaibi_beltexam.Database.UnivercityTable
+import com.example.daadalotaibi_beltexam.Database.UniversityTable
 import com.example.daadalotaibi_beltexam.Model.MyViewModel
 import com.example.daadalotaibi_beltexam.R
 import kotlinx.android.synthetic.main.db_item_row.view.*
 import kotlinx.android.synthetic.main.edit_dialog.*
 
-class RVDdapter (private val fragment: DBFragment, private var list: ArrayList<UnivercityTable>):  RecyclerView.Adapter<RVDdapter.ItemViewHolder>(){
+class RVDdapter (private val fragment: DBFragment, private var list: ArrayList<UniversityTable>):  RecyclerView.Adapter<RVDdapter.ItemViewHolder>(){
     private val myViewModel by lazy { ViewModelProvider(fragment).get(MyViewModel::class.java) }
 
     class ItemViewHolder (itemView: View): RecyclerView.ViewHolder(itemView)
@@ -45,7 +45,7 @@ class RVDdapter (private val fragment: DBFragment, private var list: ArrayList<U
         }
 
         holder.itemView.btDelete.setOnClickListener {
-            fragment.myViewModel.deleteunivercity(UnivercityTable(data.id,data.name,data.country,data.note))
+            fragment.myViewModel.deleteUniversity(UniversityTable(data.id,data.name,data.country,data.note))
         }
         holder.itemView.setOnClickListener {
             Toast.makeText(
@@ -71,7 +71,7 @@ class RVDdapter (private val fragment: DBFragment, private var list: ArrayList<U
         myInfoDialog.btNoteUpdate.setOnClickListener {
             if (myInfoDialog.etNoteUpdate.text.isNotBlank()) {
                 list[position].note = myInfoDialog.etNoteUpdate.text.toString()
-                fragment.myViewModel.updatenivercity(list[position])
+                fragment.myViewModel.updateUniversity(list[position])
                 Toast.makeText(
                     fragment.requireContext(),
                     "Update success!!",
@@ -97,7 +97,7 @@ class RVDdapter (private val fragment: DBFragment, private var list: ArrayList<U
 
     override fun getItemCount() = list.size
 
-    fun update(list: ArrayList<UnivercityTable>){
+    fun update(list: ArrayList<UniversityTable>){
         this.list = list
         notifyDataSetChanged()
     }

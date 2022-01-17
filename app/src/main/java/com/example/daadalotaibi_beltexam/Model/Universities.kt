@@ -1,3 +1,3 @@
 package com.example.daadalotaibi_beltexam.Model
 
-class Universities : ArrayList<Univercity>()
+class Universities : ArrayList<University>()
