@@ -8,16 +8,22 @@
     tools:context=".homeFragment">
 
     <Button
-        android:id="@+id/apiBtn"
+        android:id="@+id/btBrowseApi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:text="Browse API" />
+        android:layout_margin="18dp"
+        android:background="@drawable/custom_button"
+        android:text="Browse API"
+        android:textSize="20dp"
+        android:textColor="@color/white"/>
 
     <Button
-        android:id="@+id/dbBtn"
+        android:id="@+id/btLocalDB"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
+        android:textSize="20dp"
+        android:background="@drawable/custom_button"
+        android:textColor="@color/white"
         android:text="Local DB" />
 </LinearLayout>

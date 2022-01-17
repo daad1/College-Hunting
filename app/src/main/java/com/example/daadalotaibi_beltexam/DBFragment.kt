@@ -5,24 +5,24 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.daadalotaibi_beltexam.Database.TV
+import com.example.daadalotaibi_beltexam.Database.UnivercityTable
+import com.example.daadalotaibi_beltexam.Model.MyViewModel
 import com.example.daadalotaibi_beltexam.RVAdapter.RVDdapter
-import com.example.daadalotaibi_beltexam.ViewModel.ViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+
 
 
 class DBFragment : Fragment() {
 
-    private lateinit var mainRV: RecyclerView
-    private lateinit var backButton: FloatingActionButton
-    private lateinit var rvDdapter: RVDdapter
-
-
-    private val dbViewModel by lazy { ViewModelProvider(this).get(ViewModel::class.java) }
+    lateinit var btDatabaseBack: Button
+    lateinit var rvDatabase: RecyclerView
+    lateinit var DatabaseAdapter: RVDdapter
+    val myViewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) }
+    var list = ArrayList<UnivercityTable>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,32 +31,23 @@ class DBFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_d_b, container, false)
 
-        mainRV = view.findViewById(R.id.rvDB)
-        backButton = view.findViewById(R.id.backBtn)
+        rvDatabase =view.findViewById(R.id.rvDb)
+        btDatabaseBack=view.findViewById(R.id.btDatabaseBack)
 
-        loadRV()
-
-        dbViewModel.getDBList().observe(viewLifecycleOwner) { result ->
-            rvDdapter.updateShows(result)
+        btDatabaseBack.setOnClickListener {
+            Navigation.findNavController(view).navigate(R.id.action_DBFragment_to_homeFragment)
         }
 
-        dbViewModel.getDBList()
+        myViewModel.getunivercity().observe(viewLifecycleOwner, {
+                List ->
+            DatabaseAdapter.update(List as ArrayList<UnivercityTable>)
+        })
 
-        backButton.setOnClickListener {
-            findNavController().navigate(R.id.action_APIFragment_to_homeFragment)
-        }
+        DatabaseAdapter =RVDdapter(this ,list)
+        this.rvDatabase.adapter = DatabaseAdapter
+        this.rvDatabase.layoutManager = LinearLayoutManager(this.context)
 
         return view
-    }
-
-    private fun loadRV() {
-        rvDdapter = RVDdapter(this)
-        mainRV.adapter = rvDdapter
-        mainRV.layoutManager = LinearLayoutManager(requireContext())
-    }
-
-    fun deleteFromDB(tv: TV) {
-        dbViewModel.deleteFromDB(tv)
     }
 
 }

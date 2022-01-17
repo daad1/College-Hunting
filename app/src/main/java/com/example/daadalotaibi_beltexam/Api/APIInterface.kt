@@ -1,11 +1,14 @@
 package com.example.daadalotaibi_beltexam.Api
 
-import com.example.daadalotaibi_beltexam.Model.ShowResponseItem
+import com.example.daadalotaibi_beltexam.Model.Universities
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.Headers
+import retrofit2.http.Url
 
 interface APIInterface {
-    @GET("search/shows")
-    fun getShow(@Query("q") showTitle:String) : Call<ArrayList<ShowResponseItem>>
+    @Headers("Content-Type: application/json")
+    @GET
+    fun getUnivercityInfo(@Url url:String): Call<Universities?>?
+
 }

@@ -7,9 +7,11 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/showBtn"
+        android:id="@+id/btUniName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Show Name"
+        android:text="University Name"
+        android:background="@drawable/custom_button"
+        android:textColor="@color/white"
         tools:ignore="MissingConstraints" />
 </LinearLayout>

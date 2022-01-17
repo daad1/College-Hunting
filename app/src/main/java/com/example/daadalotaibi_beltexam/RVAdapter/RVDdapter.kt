@@ -1,58 +1,104 @@
 package com.example.daadalotaibi_beltexam.RVAdapter
 
+import android.app.Dialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.daadalotaibi_beltexam.DBFragment
-import com.example.daadalotaibi_beltexam.Database.TV
+import com.example.daadalotaibi_beltexam.Database.UnivercityTable
+import com.example.daadalotaibi_beltexam.Model.MyViewModel
 import com.example.daadalotaibi_beltexam.R
-import com.example.daadalotaibi_beltexam.databinding.DbItemRowBinding
+import kotlinx.android.synthetic.main.db_item_row.view.*
+import kotlinx.android.synthetic.main.edit_dialog.*
 
-class RVDdapter (val dbActivity: DBFragment) : RecyclerView.Adapter<RVDdapter.ViewHolder>() {
-    private var tvs = emptyList<TV>()
+class RVDdapter (private val fragment: DBFragment, private var list: ArrayList<UnivercityTable>):  RecyclerView.Adapter<RVDdapter.ItemViewHolder>(){
+    private val myViewModel by lazy { ViewModelProvider(fragment).get(MyViewModel::class.java) }
 
-    class ViewHolder(val binding: DbItemRowBinding) : RecyclerView.ViewHolder(binding.root)
+    class ItemViewHolder (itemView: View): RecyclerView.ViewHolder(itemView)
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
-        DbItemRowBinding.inflate(
-            LayoutInflater.from(parent.context),
-            parent,
-            false
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        return ItemViewHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.db_item_row,
+                parent,
+                false
+            )
         )
-    )
+    }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val tv = tvs[position]
+    override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
+        var data = list[position]
 
-        holder.binding.apply {
-            if (tv.imageURL.isNotEmpty()) {
-                Glide.with(holder.itemView.context)
-                    .load(tv.imageURL)
-                    .into(imgShow)
-            } else {
-                imgShow.setImageResource(R.drawable.ic_baseline_no_photography_24)
+
+        holder.itemView.apply {
+            tvName.text = data.name
+            tvCountry.text = data.country
+
+        }
+        holder.itemView.btUpdate.setOnClickListener {
+            updateDialog(position)
+        }
+
+        holder.itemView.btDelete.setOnClickListener {
+            fragment.myViewModel.deleteunivercity(UnivercityTable(data.id,data.name,data.country,data.note))
+        }
+        holder.itemView.setOnClickListener {
+            Toast.makeText(
+                fragment.requireContext(),
+                "${data.note}",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+
+
+    }
+
+    fun updateDialog(position: Int){
+        var myInfoDialog = Dialog(fragment.requireContext())
+        myInfoDialog.setContentView(R.layout.edit_dialog)
+        myInfoDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        myInfoDialog.show()
+
+        myInfoDialog.etNoteUpdate.setText(list[position].note)
+
+
+        myInfoDialog.btNoteUpdate.setOnClickListener {
+            if (myInfoDialog.etNoteUpdate.text.isNotBlank()) {
+                list[position].note = myInfoDialog.etNoteUpdate.text.toString()
+                fragment.myViewModel.updatenivercity(list[position])
+                Toast.makeText(
+                    fragment.requireContext(),
+                    "Update success!!",
+                    Toast.LENGTH_SHORT
+                ).show()
+                myInfoDialog.dismiss()
             }
-
-            tvShowName.text = tv.title
-            tvShowLanguage.text = tv.language
-
-            llMain.setOnClickListener {
-                Toast.makeText(holder.itemView.context, tv.summary, Toast.LENGTH_SHORT).show()
-            }
-
-            deleteBtn.setOnClickListener {
-                dbActivity.deleteFromDB(tv)
+            else {
+                Toast.makeText(
+                    fragment.requireContext(),
+                    "Do not leave it empty",
+                    Toast.LENGTH_SHORT
+                ).show()
+                myInfoDialog.dismiss()
             }
         }
+        myInfoDialog.btCansle.setOnClickListener{
+            myInfoDialog.dismiss()
+        }
+
+
     }
 
-    override fun getItemCount(): Int = tvs.size
+    override fun getItemCount() = list.size
 
-    fun updateShows(list: List<TV>) {
-        this.tvs = list
+    fun update(list: ArrayList<UnivercityTable>){
+        this.list = list
         notifyDataSetChanged()
     }
-
 }
