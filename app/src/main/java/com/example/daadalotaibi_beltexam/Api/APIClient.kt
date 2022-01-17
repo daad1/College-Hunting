@@ -1,6 +1,6 @@
 package com.example.daadalotaibi_beltexam.Api
 
-import com.example.daadalotaibi_beltexam.Model.Constants.Companion.unvires_URL
+import com.example.daadalotaibi_beltexam.Model.URL_University.Companion.unvires_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

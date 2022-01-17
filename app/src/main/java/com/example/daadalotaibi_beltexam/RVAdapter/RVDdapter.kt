@@ -11,13 +11,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.daadalotaibi_beltexam.DBFragment
 import com.example.daadalotaibi_beltexam.Database.UniversityTable
-import com.example.daadalotaibi_beltexam.Model.MyViewModel
+import com.example.daadalotaibi_beltexam.Model.ViewModel
 import com.example.daadalotaibi_beltexam.R
 import kotlinx.android.synthetic.main.db_item_row.view.*
 import kotlinx.android.synthetic.main.edit_dialog.*
 
 class RVDdapter (private val fragment: DBFragment, private var list: ArrayList<UniversityTable>):  RecyclerView.Adapter<RVDdapter.ItemViewHolder>(){
-    private val myViewModel by lazy { ViewModelProvider(fragment).get(MyViewModel::class.java) }
+    private val myViewModel by lazy { ViewModelProvider(fragment).get(ViewModel::class.java) }
 
     class ItemViewHolder (itemView: View): RecyclerView.ViewHolder(itemView)
 

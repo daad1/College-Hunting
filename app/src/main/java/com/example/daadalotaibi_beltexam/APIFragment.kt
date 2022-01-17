@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.daadalotaibi_beltexam.Api.APIClient
 import com.example.daadalotaibi_beltexam.Api.APIInterface
-import com.example.daadalotaibi_beltexam.Model.MyViewModel
+import com.example.daadalotaibi_beltexam.Model.ViewModel
 import com.example.daadalotaibi_beltexam.Model.Universities
 
 import com.example.daadalotaibi_beltexam.RVAdapter.RVAdapter
@@ -33,7 +33,7 @@ class APIFragment : Fragment() {
     lateinit var btAPIBack: Button
     lateinit var btSearch: Button
     lateinit var searchAdapter: RVAdapter
-    val myViewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) }
+    val myViewModel by lazy { ViewModelProvider(this).get(ViewModel::class.java) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

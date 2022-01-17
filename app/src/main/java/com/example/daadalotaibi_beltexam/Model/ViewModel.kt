@@ -9,7 +9,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MyViewModel (application: Application): AndroidViewModel(application) {
+class ViewModel (application: Application): AndroidViewModel(application) {
 
     private val univercityDao= DatabaseUniversityTable.getInstance(application).UniDao()
 

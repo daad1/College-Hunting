@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.daadalotaibi_beltexam.Database.UniversityTable
-import com.example.daadalotaibi_beltexam.Model.MyViewModel
+import com.example.daadalotaibi_beltexam.Model.ViewModel
 import com.example.daadalotaibi_beltexam.RVAdapter.RVDdapter
 
 
@@ -21,7 +21,7 @@ class DBFragment : Fragment() {
     lateinit var btDatabaseBack: Button
     lateinit var rvDatabase: RecyclerView
     lateinit var databaseAdapter: RVDdapter
-    val myViewModel by lazy { ViewModelProvider(this).get(MyViewModel::class.java) }
+    val myViewModel by lazy { ViewModelProvider(this).get(ViewModel::class.java) }
     var list = ArrayList<UniversityTable>()
 
     override fun onCreateView(
